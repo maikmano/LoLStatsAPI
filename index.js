@@ -41,7 +41,7 @@ app.get('/players/:region/:nick', async  (req, res) => {
         soloLP: solo ? solo.leaguePoints : null,  
         tierFlex: flex ? flex.tier + ' ' + flex.rank : null,
         flexLP: flex ? flex.leaguePoints : null,  
-        winrate: `${winrateSolo.toFixed(2)}%`,
+        winrate: isNaN(winrateSolo) ? null : `${winrateSolo.toFixed(2)}%`,
         winrateFlex: isNaN(winrateFlex) ? null : `${winrateFlex.toFixed(2)}%`,
         soloDuoWins,
         soloDuoLosses,
