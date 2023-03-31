@@ -29,9 +29,11 @@ app.get('/players/:region/:nick', async  (req, res) => {
       const flexLosses = flex ? flex.losses : 0
       const winrateSolo = (soloDuoWins / (soloDuoWins + soloDuoLosses)) * 100
       const winrateFlex = (flexWins / (flexWins + flexLosses)) * 100
+     
 
     // Retorna as informações em formato JSON
 
+    
       res.json({
         nick: summonerName,
         level: summonerLevel,
@@ -40,12 +42,14 @@ app.get('/players/:region/:nick', async  (req, res) => {
         tierFlex: flex ? flex.tier + ' ' + flex.rank : null,
         flexLP: flex ? flex.leaguePoints : null,  
         winrate: `${winrateSolo.toFixed(2)}%`,
-        winrateFlex: `${winrateFlex.toFixed(2)}%`,
+        winrateFlex: isNaN(winrateFlex) ? null : `${winrateFlex.toFixed(2)}%`,
         soloDuoWins,
         soloDuoLosses,
         flexWins,
         flexLosses
       })
+      
+
 
   }catch(error){
       res.status(error.response.status).json({ error: error.response.data })
