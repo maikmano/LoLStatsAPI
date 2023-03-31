@@ -1,14 +1,15 @@
+const dotenv = require('dotenv')
+dotenv.config();
+
 const express = require('express')
 const axios = require('axios')
-const dotenv = require('dotenv')
-
 
 const app = express()
 
 app.get('/players/:region/:nick', async  (req, res) => {
   const { nick } = req.params
   const { region } = req.params
-  const apiKey = 'RGAPI-71083e90-0672-4a70-9653-fddee2545464'
+  const apiKey = process.env.API
 
   try{
      // Fazer a solicitação para obter o ID do player
